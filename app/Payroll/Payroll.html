@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Payroll</title>
+
+   <style>
+       .sk-circle {
+           margin: 100px auto;
+           width: 40px;
+           height: 40px;
+           position: relative;
+       }
+       .sk-circle .sk-child {
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           left: 0;
+           top: 0;
+       }
+       .sk-circle .sk-child:before {
+           content: '';
+           display: block;
+           margin: 0 auto;
+           width: 15%;
+           height: 15%;
+           background-color: #333;
+           border-radius: 100%;
+           -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+           animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+       }
+       .sk-circle .sk-circle2 {
+           -webkit-transform: rotate(30deg);
+           -ms-transform: rotate(30deg);
+           transform: rotate(30deg); }
+       .sk-circle .sk-circle3 {
+           -webkit-transform: rotate(60deg);
+           -ms-transform: rotate(60deg);
+           transform: rotate(60deg); }
+       .sk-circle .sk-circle4 {
+           -webkit-transform: rotate(90deg);
+           -ms-transform: rotate(90deg);
+           transform: rotate(90deg); }
+       .sk-circle .sk-circle5 {
+           -webkit-transform: rotate(120deg);
+           -ms-transform: rotate(120deg);
+           transform: rotate(120deg); }
+       .sk-circle .sk-circle6 {
+           -webkit-transform: rotate(150deg);
+           -ms-transform: rotate(150deg);
+           transform: rotate(150deg); }
+       .sk-circle .sk-circle7 {
+           -webkit-transform: rotate(180deg);
+           -ms-transform: rotate(180deg);
+           transform: rotate(180deg); }
+       .sk-circle .sk-circle8 {
+           -webkit-transform: rotate(210deg);
+           -ms-transform: rotate(210deg);
+           transform: rotate(210deg); }
+       .sk-circle .sk-circle9 {
+           -webkit-transform: rotate(240deg);
+           -ms-transform: rotate(240deg);
+           transform: rotate(240deg); }
+       .sk-circle .sk-circle10 {
+           -webkit-transform: rotate(270deg);
+           -ms-transform: rotate(270deg);
+           transform: rotate(270deg); }
+       .sk-circle .sk-circle11 {
+           -webkit-transform: rotate(300deg);
+           -ms-transform: rotate(300deg);
+           transform: rotate(300deg); }
+       .sk-circle .sk-circle12 {
+           -webkit-transform: rotate(330deg);
+           -ms-transform: rotate(330deg);
+           transform: rotate(330deg); }
+       .sk-circle .sk-circle2:before {
+           -webkit-animation-delay: -1.1s;
+           animation-delay: -1.1s; }
+       .sk-circle .sk-circle3:before {
+           -webkit-animation-delay: -1s;
+           animation-delay: -1s; }
+       .sk-circle .sk-circle4:before {
+           -webkit-animation-delay: -0.9s;
+           animation-delay: -0.9s; }
+       .sk-circle .sk-circle5:before {
+           -webkit-animation-delay: -0.8s;
+           animation-delay: -0.8s; }
+       .sk-circle .sk-circle6:before {
+           -webkit-animation-delay: -0.7s;
+           animation-delay: -0.7s; }
+       .sk-circle .sk-circle7:before {
+           -webkit-animation-delay: -0.6s;
+           animation-delay: -0.6s; }
+       .sk-circle .sk-circle8:before {
+           -webkit-animation-delay: -0.5s;
+           animation-delay: -0.5s; }
+       .sk-circle .sk-circle9:before {
+           -webkit-animation-delay: -0.4s;
+           animation-delay: -0.4s; }
+       .sk-circle .sk-circle10:before {
+           -webkit-animation-delay: -0.3s;
+           animation-delay: -0.3s; }
+       .sk-circle .sk-circle11:before {
+           -webkit-animation-delay: -0.2s;
+           animation-delay: -0.2s; }
+       .sk-circle .sk-circle12:before {
+           -webkit-animation-delay: -0.1s;
+           animation-delay: -0.1s; }
+
+       @-webkit-keyframes sk-circleBounceDelay {
+           0%, 80%, 100% {
+               -webkit-transform: scale(0);
+               transform: scale(0);
+           } 40% {
+                 -webkit-transform: scale(1);
+                 transform: scale(1);
+             }
+       }
+
+       @keyframes sk-circleBounceDelay {
+           0%, 80%, 100% {
+               -webkit-transform: scale(0);
+               transform: scale(0);
+           } 40% {
+                 -webkit-transform: scale(1);
+                 transform: scale(1);
+             }
+       }
+   </style>
+
+</head>
+<body>
+<div class="container col-md-offset-3" id="my">
+
+
+    <div class="col-md-8" style="background-color: lightgrey">
+        <h2>Payroll</h2>
+        <div style="background-color: lightgrey">
+
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <label>Choose Employee Id</label>
+                    <br>
+                    <select class="form-control" id="inqdestrg" ng-model="Payroll.eid" ng-change="getdt(Payroll.eid)">
+                        <option value="">Choose</option>
+                        <option ng-repeat="c in Payroll.edata" value="{{c.id}}">{{c.name}}</option>
+
+
+                    </select>
+                    <br>
+
+                </div>
+                <br>
+                <div class="col-md-6">
+                    <label>Name</label>
+                    <br>
+                    <input type="text" class="form-control" name="empname" id="empname"
+                           ng-model="Payroll.empname">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Employee Id</label>
+                    <br>
+                    <input type="text" class="form-control" name="empid" id="empid"
+                           ng-model="Payroll.empid">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Email</label>
+                    <br>
+                    <input type="text" class="form-control" name="empemail" id="empemail"
+                           ng-model="Payroll.empemail">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Position</label>
+                    <br>
+                    <select class="form-control" name="position" id="position" ng-model="Payroll.position">
+
+                        <option value="">Choose Below</option>
+                        <option value="Engineer">Engineer</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Lead">Lead</option>
+
+                    </select>
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Nature Of Employment</label>
+                    <br>
+                    <select class="form-control" name="nemp" id="nemp" ng-model="Payroll.nemp">
+
+                        <option value="">Choose Below</option>
+                        <option value="Contractual">Contractual</option>
+                        <option value="Salaried">Salaried</option>
+
+
+                    </select>
+                    <br>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>Bank Account Details</label>
+                    <br>
+                    <input type="text" class="form-control" name="empbad" id="empbad"
+                           ng-model="Payroll.empbad">
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <label>PAN Number</label>
+                    <br>
+                    <input type="text" class="form-control" name="emppan" id="emppan"
+                           ng-model="Payroll.emppan">
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <label>PF Number</label>
+                    <br>
+                    <input type="text" class="form-control" name="emppf" id="emppf"
+                           ng-model="Payroll.emppf">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>ESI Number</label>
+                    <br>
+                    <input type="text" class="form-control" name="empesi" id="empesi"
+                           ng-model="Payroll.empesi ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Band</label>
+                    <br>
+                    <select class="form-control" name="band" id="band" ng-model="Payroll.band">
+                        <option value="">Choose Below</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+
+
+                    </select>
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+
+                    <label>CTC</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="ctc" id="ctc"
+                           ng-model="Payroll.ctc">
+
+                    <br>
+                </div>
+
+
+                <div class="col-md-3">
+                    <label>Month</label>
+                    <br>
+                    <select class="form-control" name="mnth" id="mnth" ng-model="Payroll.mnth">
+
+                        <option value="">Choose Below</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+
+
+                    </select>
+                    <br>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Year</label>
+                    <br>
+                    <input type="text" class="form-control" name="year" id="year"
+                           ng-model="Payroll.year ">
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <label>Mobile</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="mobile" id="mobile"
+                           ng-model="Payroll.mobile">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>CCA</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="empcca" id="empcca"
+                           ng-model="Payroll.empcca ">
+                    <br>
+                </div>
+                <div class="col-md-6">
+                    <label>Skill Enhancement (SA)</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="empsa" id="empsa"
+                           ng-model="Payroll.empsa ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Performance Incentive (PI)</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="emppi" id="emppi"
+                           ng-model="Payroll.emppi ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Arrears and Adjustments (A&A)</label>
+                    <label class="small text-muted">In INR</label>
+                    <br>
+                    <input type="text" class="form-control" name="empaa" id="empaa"
+                           ng-model="Payroll.empaa ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Loan Deduction</label>
+                    <br>
+                    <input type="text" class="form-control" name="emplde" id="emplde"
+                           ng-model="Payroll.emplde ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Advance Deduction</label>
+                    <br>
+                    <input type="text" class="form-control" name="empade" id="empade"
+                           ng-model="Payroll.empade ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Insurance</label>
+                    <br>
+                    <input type="text" class="form-control" name="empins" id="empins"
+                           ng-model="Payroll.empins ">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>TDS</label>
+                    <br>
+                    <input type="text" class="form-control" name="emptds" id="emptds"
+                           ng-model="Payroll.emptds">
+                    <br>
+                </div>
+
+                <div class="col-md-6">
+                    <label>ESI Paid</label>
+                    <br>
+                    <select class="form-control" name="esip" id="esip" ng-model="Payroll.esip">
+
+                        <option value="">Choose Below</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+
+
+                    </select>
+                    <br>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-8 text-center center-block ">
+        <br>
+
+        <button class="btn btn-primary btn-block" ng-click="Payroll.getsalary()">Get Salary Breakup</button>
+        <br>
+        <br>
+        <div class="sk-circle" ng-show="Payroll.spi">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+
+        </div>
+
+
+
+        <div ng-show="Payroll.IsVisible" id="td1" class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a>Salary Breakup</a>
+                    </h4>
+                </div>
+                <div>
+
+
+                    <div id="collapse32" style="background-color: lightgrey">
+
+                        <table class="table" id="table1">
+
+                            <tbody align="left">
+                            <tr class="odd">
+                                <td>Basic</td>
+                                <td>Rs {{Payroll.basic}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>HRA</td>
+                                <td>Rs {{Payroll.hra}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>Conveyance</td>
+                                <td>Rs {{Payroll.conv}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>Bonus</td>
+                                <td>Rs {{Payroll.bonus}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>Mobile</td>
+                                <td>Rs {{Payroll.mobile}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>CCA</td>
+                                <td>Rs {{Payroll.empcca}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>Skill Enhancement (SA)</td>
+                                <td>Rs {{Payroll.empsa}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>Performance Incentive (PI)</td>
+                                <td>Rs {{Payroll.emppi}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>Arrears and Adjustments (A&A)</td>
+                                <td>Rs {{Payroll.empaa}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>PF employee share</td>
+                                <td>Rs {{Payroll.epf}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>PF company share</td>
+                                <td>Rs {{Payroll.cpf}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>Loan deduction</td>
+                                <td>{{ld}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>Advance deduction</td>
+                                <td>{{Payroll.empade}}</td>
+
+                            </tr>
+                            <tr class="even">
+                                <td>Insurance</td>
+                                <td>{{Insurance}}</td>
+
+                            </tr>
+                            <tr class="odd">
+                                <td>TDS</td>
+                                <td>Rs {{Payroll.emptds}}</td>
+
+                            </tr>
+
+                            <tr style="background-color: lightgreen">
+                                <td><b>Total Earning</b></td>
+                                <td>Rs {{Payroll.totalearnings}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td><b>Total Deductions</b></td>
+
+
+                            </tr>
+
+                            <tr>
+                                <td>TDS</td>
+                                <td>Rs {{Payroll.emptds}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Loan</td>
+                                <td>Rs {{Payroll.emplde}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>Advances</td>
+                                <td>Rs {{Payroll.emplde}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td>ESI employee share</td>
+
+                                <td>Rs {{Payroll.eesi}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>PF employee share</td>
+                                <td>Rs {{Payroll.cesi}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td><b>Company Contributions</b></td>
+                            </tr>
+
+                            <tr>
+                                <td>ESI Company share/Insurance</td>
+                                <td>Rs {{Payroll.cesi}}</td>
+                            </tr>
+                            <tr>
+                                <td>PF Company share</td>
+                                <td>Rs {{Payroll.cpf}}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Total Salary In Hand</b></td>
+                            </tr>
+
+
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                    <div class="row">
+                        &nbsp; &nbsp;
+                        <button type="button" ng-click="Payroll.exptbl()" class="btn btn-primary">Export
+                            Table
+                        </button>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

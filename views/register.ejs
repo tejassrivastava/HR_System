@@ -1,0 +1,47 @@
+﻿<%- include('partials/header') %>
+<div class="form-container well container col-md-4 col-md-offset-4">
+    <h2>  <i class="glyphicon glyphicon-user" ></i>  Register</h2>
+    <% if(locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <form method="post">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" name="firstName" id="firstName" class="form-control" value="<%= locals.firstName || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" name="lastName" id="lastName" class="form-control" value="<%= locals.lastName || '' %>" required />
+        </div>
+        <div class="form-group">
+            <label for="username">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="<%= locals.email || '' %>"
+                   required />
+            <label class="small text-muted">Use these domains example @fosteringlinux.com , @keenable.in</label>
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-control" name="role" id="role" value="<%= locals.role || '' %>">
+                <option value="">Choose From Below</option>
+                <option value="Admin">Admin</option>
+                <option value="HR">HR</option>
+                <option value="Emp">Emp</option>
+            </select>
+
+
+
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <a href="/login" class="btn btn-link">Cancel</a>
+
+        </div>
+    </form>
+
+</div>
+
+<%- include('partials/footer') %>
