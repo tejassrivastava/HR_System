@@ -1,0 +1,27 @@
+﻿<%- include('partials/header') %>
+<div class="form-container well container col-md-4 col-md-offset-4">
+
+    <h2>  <i class="glyphicon glyphicon-log-in" ></i>  Login</h2>
+    <% if(locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <% if(locals.success) { %>
+        <div class="alert alert-success"><%= success %></div>
+    <% } %>
+    <form method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="<%= locals.email || '' %>" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="/register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+</div>
+<%- include('partials/footer') %>
